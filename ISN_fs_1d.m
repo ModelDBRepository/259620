@@ -68,15 +68,15 @@ if simulate_network
 
     % - perturbing the specific mode
     I_specPert = 1 + .25*rand(N,length(T))/5;
-    dI_pert = -.1*(sin(2*po_inh)')-.1;
-    I_specPert(NE+1:end,t_pert) = I_specPert(NE+1:end,t_pert) + dI_pert;
+    dI_specPert = -.1*(sin(2*po_inh)')-.1;
+    I_specPert(NE+1:end,t_pert) = I_specPert(NE+1:end,t_pert) + dI_specPert;
 
     r_specPert = simulate_dynamics(I_specPert, N, T, w, dt, tau);
 
     % - perturbing the uniform mode
     I_genPert = 1 + .25*rand(N,length(T))/5;
-    dI_pert = dI_pert(randperm(NI)); % randomizing the specific pert.
-    I_genPert(NE+1:end,t_pert) = I_genPert(NE+1:end,t_pert) + dI_pert;
+    dI_genPert = dI_specPert(randperm(NI)); % randomizing the specific pert.
+    I_genPert(NE+1:end,t_pert) = I_genPert(NE+1:end,t_pert) + dI_genPert;
 
     r_genPert = simulate_dynamics(I_genPert, N, T, w, dt, tau);
 
